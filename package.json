@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AyoMoses/forkify-meals-app.git"
+    "url": "git+https://github.com/AyoMoses/forkify-recipes-app.git"
   },
   "author": "ayoMoses",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AyoMoses/forkify-meals-app/issues"
+    "url": "https://github.com/AyoMoses/forkify-recipes-app/issues"
   },
-  "homepage": "https://github.com/AyoMoses/forkify-meals-app#readme",
+  "homepage": "https://github.com/AyoMoses/forkify-recipes-app#readme",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.9.2",
     "parcel": "^2.9.2"
