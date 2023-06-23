@@ -1,0 +1,23 @@
+{
+  "name": "forkify-meals-app",
+  "version": "1.0.0",
+  "description": "Recipe application ",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyoMoses/forkify-meals-app.git"
+  },
+  "author": "ayoMoses",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AyoMoses/forkify-meals-app/issues"
+  },
+  "homepage": "https://github.com/AyoMoses/forkify-meals-app#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.9.2",
+    "parcel": "^2.9.2"
+  }
+}
