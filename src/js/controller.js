@@ -1,7 +1,7 @@
 import icons from '../img/icons.svg'; // how to import in parcel 1
 import icons from 'url:../img/icons.svg'; // how to import in parcel 2
 import 'core-js/stable'; // polyfill other js codes for old browsers
-import 'regenerator-runtime/runtime'; // polyfill asyn/await 
+import 'regenerator-runtime/runtime'; // polyfill asyn/await
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -31,14 +31,18 @@ const renderSpinner = function (parentEl) {
 };
 
 const showRecipe = async function () {
-
-  // render spinner
-  renderSpinner(recipeContainer);
-
   // loading recipe
   try {
+    const id = window.location.hash.slice(1);
+    console.log(id);
+
+    if (!id) return;
+
+    // render spinner
+    renderSpinner(recipeContainer);
+
     const res = await fetch(
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
     );
     const data = await res.json();
 
@@ -164,5 +168,11 @@ const showRecipe = async function () {
     alert(err);
   }
 };
-showRecipe();
+
+// listen for hashchange event
+
+// instead of having loads of event listeners to do one thing we can have it in an array and loop over
+['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));
+// window.addEventListener('hashchange', showRecipe);
+// window.addEventListener('load', showRecipe);
 ///////////////////////////////////////

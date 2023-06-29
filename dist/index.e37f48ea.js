@@ -575,12 +575,14 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"aenu9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _webImmediateJs = require("core-js/modules/web.immediate.js"); ///////////////////////////////////////
+var _webImmediateJs = require("core-js/modules/web.immediate.js"); // window.addEventListener('hashchange', showRecipe);
+ // window.addEventListener('load', showRecipe);
+ ///////////////////////////////////////
 var _iconsSvg = require("../img/icons.svg"); // how to import in parcel 1
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 var _iconsSvg1 = require("url:../img/icons.svg"); // how to import in parcel 2
 var _iconsSvgDefault1 = parcelHelpers.interopDefault(_iconsSvg1);
-var _runtime = require("regenerator-runtime/runtime"); // polyfill asyn/await 
+var _runtime = require("regenerator-runtime/runtime"); // polyfill asyn/await
 const recipeContainer = document.querySelector(".recipe");
 const timeout = function(s) {
     return new Promise(function(_, reject) {
@@ -604,11 +606,14 @@ const renderSpinner = function(parentEl) {
     parentEl.insertAdjacentHTML("afterbegin", markup);
 };
 const showRecipe = async function() {
-    // render spinner
-    renderSpinner(recipeContainer);
     // loading recipe
     try {
-        const res = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886");
+        const id = window.location.hash.slice(1);
+        console.log(id);
+        if (!id) return;
+        // render spinner
+        renderSpinner(recipeContainer);
+        const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
         const data = await res.json();
         if (!res.ok) throw new Error(`${data.message} (${res.status})`);
         // we have receipe as the object name hence we destructure
@@ -721,7 +726,12 @@ const showRecipe = async function() {
         alert(err);
     }
 };
-showRecipe();
+// listen for hashchange event
+// instead of having loads of event listeners to do one thing we can have it in an array and loop over
+[
+    "hashchange",
+    "load"
+].forEach((ev)=>window.addEventListener(ev, showRecipe));
 
 },{"core-js/modules/web.immediate.js":"49tUX","../img/icons.svg":"cMpiy","url:../img/icons.svg":"loVOp","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
