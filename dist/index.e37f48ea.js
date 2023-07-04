@@ -574,14 +574,13 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"aenu9":[function(require,module,exports) {
+// import icons from '../img/icons.svg'; // how to import in parcel 1
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _webImmediateJs = require("core-js/modules/web.immediate.js"); // window.addEventListener('hashchange', showRecipe);
  // window.addEventListener('load', showRecipe);
  ///////////////////////////////////////
-var _iconsSvg = require("../img/icons.svg"); // how to import in parcel 1
+var _iconsSvg = require("url:../img/icons.svg"); // how to import in parcel 2
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
-var _iconsSvg1 = require("url:../img/icons.svg"); // how to import in parcel 2
-var _iconsSvgDefault1 = parcelHelpers.interopDefault(_iconsSvg1);
 var _runtime = require("regenerator-runtime/runtime"); // polyfill asyn/await
 const recipeContainer = document.querySelector(".recipe");
 const timeout = function(s) {
@@ -598,7 +597,7 @@ const renderSpinner = function(parentEl) {
     const markup = `
     <div class="spinner">
       <svg>
-        <use href="${(0, _iconsSvgDefault1.default)}#icon-loader"></use>
+        <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
       </svg>
     </div>
   `;
@@ -643,14 +642,14 @@ const showRecipe = async function() {
       <div class="recipe__details">
         <div class="recipe__info">
           <svg class="recipe__info-icon">
-            <use href="${(0, _iconsSvgDefault1.default)}.svg#icon-clock"></use>
+            <use href="${(0, _iconsSvgDefault.default)}.svg#icon-clock"></use>
           </svg>
           <span class="recipe__info-data recipe__info-data--minutes">${recipe.cookingTime}</span>
           <span class="recipe__info-text">minutes</span>
         </div>
         <div class="recipe__info">
           <svg class="recipe__info-icon">
-            <use href="${(0, _iconsSvgDefault1.default)}.svg#icon-users"></use>
+            <use href="${(0, _iconsSvgDefault.default)}.svg#icon-users"></use>
           </svg>
           <span class="recipe__info-data recipe__info-data--people">${recipe.servings}</span>
           <span class="recipe__info-text">servings</span>
@@ -658,12 +657,12 @@ const showRecipe = async function() {
           <div class="recipe__info-buttons">
             <button class="btn--tiny btn--increase-servings">
               <svg>
-                <use href="${(0, _iconsSvgDefault1.default)}.svg#icon-minus-circle"></use>
+                <use href="${(0, _iconsSvgDefault.default)}.svg#icon-minus-circle"></use>
               </svg>
             </button>
             <button class="btn--tiny btn--increase-servings">
               <svg>
-                <use href="${(0, _iconsSvgDefault1.default)}.svg#icon-plus-circle"></use>
+                <use href="${(0, _iconsSvgDefault.default)}.svg#icon-plus-circle"></use>
               </svg>
             </button>
           </div>
@@ -671,12 +670,12 @@ const showRecipe = async function() {
 
         <div class="recipe__user-generated">
           <svg>
-            <use href="${(0, _iconsSvgDefault1.default)}.svg#icon-user"></use>
+            <use href="${(0, _iconsSvgDefault.default)}.svg#icon-user"></use>
           </svg>
         </div>
         <button class="btn--round">
           <svg class="">
-            <use href="${(0, _iconsSvgDefault1.default)}.svg#icon-bookmark-fill"></use>
+            <use href="${(0, _iconsSvgDefault.default)}.svg#icon-bookmark-fill"></use>
           </svg>
         </button>
       </div>
@@ -688,7 +687,7 @@ const showRecipe = async function() {
             return `
                 <li class="recipe__ingredient">
                   <svg class="recipe__icon">
-                    <use href="${0, _iconsSvgDefault1.default}.svg#icon-check"></use>
+                    <use href="${0, _iconsSvgDefault.default}.svg#icon-check"></use>
                   </svg>
                   <div class="recipe__quantity">${ing.quantity}</div>
                   <div class="recipe__description">
@@ -715,7 +714,7 @@ const showRecipe = async function() {
         >
           <span>Directions</span>
           <svg class="search__icon">
-            <use href="${(0, _iconsSvgDefault1.default)}.svg#icon-arrow-right"></use>
+            <use href="${(0, _iconsSvgDefault.default)}.svg#icon-arrow-right"></use>
           </svg>
         </a>
       </div>
@@ -733,7 +732,7 @@ const showRecipe = async function() {
     "load"
 ].forEach((ev)=>window.addEventListener(ev, showRecipe));
 
-},{"core-js/modules/web.immediate.js":"49tUX","../img/icons.svg":"cMpiy","url:../img/icons.svg":"loVOp","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","url:../img/icons.svg":"loVOp","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("52e9b3eefbbce1ed");
 require("292fa64716f5b39e");
@@ -2045,10 +2044,10 @@ module.exports = function(scheduler, hasTimeArg) {
 },{"373dd417176da2c5":"i8HOC","a68ecfcbf29c46f6":"148ka","7087588d33667af2":"l3Kyn","7679d27a979f2651":"2BA6V","7493ba8d8bb8623d":"73xBt","cff2c830bdea4f24":"RsFXo","58a74f00cee1ac64":"b9O3D"}],"2BA6V":[function(require,module,exports) {
 /* global Bun -- Deno case */ module.exports = typeof Bun == "function" && Bun && typeof Bun.version == "string";
 
-},{}],"cMpiy":[function(require,module,exports) {
-module.exports = require("17cff2908589362b").getBundleURL("hWUTQ") + "icons.21bad73c.svg" + "?" + Date.now();
+},{}],"loVOp":[function(require,module,exports) {
+module.exports = require("9bcc84ee5d265e38").getBundleURL("hWUTQ") + "icons.dfd7a6db.svg" + "?" + Date.now();
 
-},{"17cff2908589362b":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+},{"9bcc84ee5d265e38":"lgJ39"}],"lgJ39":[function(require,module,exports) {
 "use strict";
 var bundleURL = {};
 function getBundleURLCached(id) {
@@ -2083,10 +2082,7 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"loVOp":[function(require,module,exports) {
-module.exports = require("9bcc84ee5d265e38").getBundleURL("hWUTQ") + "icons.dfd7a6db.svg" + "?" + Date.now();
-
-},{"9bcc84ee5d265e38":"lgJ39"}],"dXNgZ":[function(require,module,exports) {
+},{}],"dXNgZ":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *

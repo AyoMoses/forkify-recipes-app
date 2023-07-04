@@ -1,4 +1,4 @@
-import icons from '../img/icons.svg'; // how to import in parcel 1
+// import icons from '../img/icons.svg'; // how to import in parcel 1
 import icons from 'url:../img/icons.svg'; // how to import in parcel 2
 import 'core-js/stable'; // polyfill other js codes for old browsers
 import 'regenerator-runtime/runtime'; // polyfill asyn/await
