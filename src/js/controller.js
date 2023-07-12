@@ -1,3 +1,5 @@
+import * as model from './model.js';
+
 // import icons from '../img/icons.svg'; // how to import in parcel 1
 import icons from 'url:../img/icons.svg'; // how to import in parcel 2
 import 'core-js/stable'; // polyfill other js codes for old browsers
@@ -41,29 +43,9 @@ const showRecipe = async function () {
     // render spinner
     renderSpinner(recipeContainer);
 
-    const res = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-    );
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-
-    // we have receipe as the object name hence we destructure
-    // let recipe = data.data.recipe;
-    let { recipe } = data.data;
-    // we then reformat the data gotten from the API
-    recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      ingredients: recipe.ingredients,
-      cookingTime: recipe.cooking_time,
-    };
-
-    console.log(recipe);
+    // load recipe from model - since loadrecipe returns a promise, we need to await before moving on in the codebase
+    await model.loadRecipe(id);
+    const { recipe } = model.state;
 
     // (2) rendring recipe
     const markup = `
