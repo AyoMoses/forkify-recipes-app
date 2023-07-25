@@ -575,7 +575,12 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"aenu9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _webImmediateJs = require("core-js/modules/web.immediate.js"); // window.addEventListener('hashchange', controlRecipes);
+var _webImmediateJs = require("core-js/modules/web.immediate.js"); // listen for hashchange event
+ // instead of having loads of event listeners to do one thing we can have it in an array and loop over
+ // ['hashchange', 'load'].forEach(ev =>
+ //   window.addEventListener(ev, controlRecipes)
+ // );
+ // window.addEventListener('hashchange', controlRecipes);
  // window.addEventListener('load', controlRecipes);
  ///////////////////////////////////////
 var _modelJs = require("./model.js");
@@ -605,15 +610,14 @@ const controlRecipes = async function() {
         // (2) rendring recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
-        alert(err);
+        console.log(err);
     }
 };
-// listen for hashchange event
-// instead of having loads of event listeners to do one thing we can have it in an array and loop over
-[
-    "hashchange",
-    "load"
-].forEach((ev)=>window.addEventListener(ev, controlRecipes));
+// the publisher subscriber pattern
+const init = function() {
+    (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
+};
+init();
 
 },{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model.js":"Y4A21","./views/recipeView.js":"l60JC"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
@@ -2647,6 +2651,12 @@ class recipeView {
         this.#parentElement.innerHTML = "";
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
     };
+    addHandlerRender(handler) {
+        [
+            "hashchange",
+            "load"
+        ].forEach((ev)=>window.addEventListener(ev, handler));
+    }
     #generateMarkup() {
         // console.log(this.#data);
         return `

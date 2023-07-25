@@ -34,16 +34,21 @@ const controlRecipes = async function () {
     // (2) rendring recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    alert(err);
+    console.log(err);
   }
 };
 
+// the publisher subscriber pattern
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+};
+init();
 // listen for hashchange event
 
 // instead of having loads of event listeners to do one thing we can have it in an array and loop over
-['hashchange', 'load'].forEach(ev =>
-  window.addEventListener(ev, controlRecipes)
-);
+// ['hashchange', 'load'].forEach(ev =>
+//   window.addEventListener(ev, controlRecipes)
+// );
 // window.addEventListener('hashchange', controlRecipes);
 // window.addEventListener('load', controlRecipes);
 ///////////////////////////////////////
