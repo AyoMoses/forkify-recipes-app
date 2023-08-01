@@ -1,4 +1,4 @@
-import { API_URL, API_KEY } from './config';
+import { API_URL, API_KEY, RES_PER_PAGE } from './config';
 import { getJSON } from './helpers';
 
 // all the data we need for the app are stored in the state
@@ -7,6 +7,8 @@ export const state = {
   search: {
     query: '',
     results: [],
+    page: 1,
+    resultsPerpage: RES_PER_PAGE,
   },
 };
 
@@ -51,8 +53,18 @@ export const loadSearchResults = async function (query) {
         image: rec.image_url,
       };
     });
+    console.log(state.search.results);
   } catch (err) {
     console.error(`${err} 😢`);
     throw err;
   }
+};
+
+export const getSearchResultsPage = function (page = state.search.page) {
+  state.search.page = page;
+
+  const start = (page - 1) * state.search.resultsPerpage; // 0;
+  const end = page * state.search.resultsPerpage; // 9;
+  console.log(start, end);
+  return state.search.results.slice(start, end);
 };

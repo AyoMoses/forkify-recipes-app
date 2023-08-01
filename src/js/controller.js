@@ -7,9 +7,10 @@ import 'core-js/stable'; // polyfill other js codes for old browsers
 import 'regenerator-runtime/runtime'; // polyfill asyn/await
 import { async } from 'regenerator-runtime';
 
-if (module.hot) {
-  module.hot.accept();
-}
+// hot module replacement
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 const controlRecipes = async function () {
   // loading recipe
@@ -44,7 +45,8 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3. Render results
-    resultsView.render(model.state.search.results);
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage());
   } catch (err) {
     console.log(err);
   }
