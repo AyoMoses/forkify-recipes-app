@@ -28,7 +28,7 @@ const controlRecipes = async function () {
 
     // (2) rendring recipe
     recipeView.render(model.state.recipe);
-  } catch (err) {
+   } catch (err) {
     recipeView.renderError();
   }
 };
@@ -56,6 +56,7 @@ const controlSearchResults = async function () {
   }
 };
 
+// handle pagination events
 const controlPagination = function (goToPage) {
   // 1. Render NEW results
   // resultsView.render(model.state.search.results);
@@ -65,9 +66,19 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+// handle servings
+const controlServings = function (newServings) {
+  // Update the recipe servings (in the state)
+  model.updateServings(newServings);
+
+  // Update the recipe view
+  recipeView.render(model.state.recipe);
+};
+
 // the publisher subscriber pattern
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };

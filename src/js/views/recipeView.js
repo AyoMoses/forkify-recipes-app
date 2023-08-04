@@ -13,6 +13,15 @@ class recipeView extends View {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
 
+  addHandlerUpdateServings(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--update-servings');
+      if (!btn) return;
+      const { updateTo } = btn.dataset; // dataset.updateTo in camelCase bcos what we have in the html is update-to which is converted cos of the dash
+      if (+updateTo > 0) handler(+updateTo);
+    });
+  }
+
   _generateMarkup() {
     // console.log(this._data);
     return `
@@ -45,12 +54,16 @@ class recipeView extends View {
           <span class="recipe__info-text">servings</span>
 
           <div class="recipe__info-buttons">
-            <button class="btn--tiny btn--increase-servings">
+            <button class="btn--tiny btn--update-servings" data-update-to="${
+              this._data.servings - 1
+            }">
               <svg>
                 <use href="${icons}.svg#icon-minus-circle"></use>
               </svg>
             </button>
-            <button class="btn--tiny btn--increase-servings">
+            <button class="btn--tiny btn--update-servings" data-update-to="${
+              this._data.servings + 1
+            }">
               <svg>
                 <use href="${icons}.svg#icon-plus-circle"></use>
               </svg>
