@@ -23,12 +23,15 @@ const controlRecipes = async function () {
     // render spinner
     recipeView.renderSpinner();
 
-    // load recipe from model - since loadrecipe returns a promise, we need to await before moving on in the codebase
+    // (0) Update results view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
+
+    // (1) load recipe from model - since loadrecipe returns a promise, we need to await before moving on in the codebase
     await model.loadRecipe(id);
 
     // (2) rendring recipe
     recipeView.render(model.state.recipe);
-   } catch (err) {
+  } catch (err) {
     recipeView.renderError();
   }
 };

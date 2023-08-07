@@ -605,7 +605,9 @@ const controlRecipes = async function() {
         if (!id) return;
         // render spinner
         (0, _recipeViewJsDefault.default).renderSpinner();
-        // load recipe from model - since loadrecipe returns a promise, we need to await before moving on in the codebase
+        // (0) Update results view to mark selected search result
+        (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPage());
+        // (1) load recipe from model - since loadrecipe returns a promise, we need to await before moving on in the codebase
         await _modelJs.loadRecipe(id);
         // (2) rendring recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
@@ -3132,7 +3134,8 @@ class View {
         this._parentElement.insertAdjacentHTML("afterbegin", markup);
     }
     update(data) {
-        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
+        // if (!data || (Array.isArray(data) && data.length === 0))
+        //   return this.renderError();
         this._data = data;
         const newMarkup = this._generateMarkup();
         const newDOM = document.createRange().createContextualFragment(newMarkup); // creates a node object. It creates a virtual DOM that only lives on the memory
@@ -3233,9 +3236,10 @@ class ResultsView extends (0, _viewDefault.default) {
         return this._data.map(this._generateMarkupPreview).join("");
     }
     _generateMarkupPreview(result) {
+        const id = window.location.hash.slice(1);
         return `
         <li class="preview">
-            <a class="preview__link" href="#${result.id}">
+            <a class="preview__link ${result.id === id ? `preview__link--active` : ""}" href="#${result.id}">
                 <figure class="preview__fig">
                     <img src="${result.image}" alt="${result.title}" />
                 </figure>
