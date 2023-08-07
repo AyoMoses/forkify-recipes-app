@@ -4,10 +4,10 @@ import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
+import addRecipeView from './views/addRecipeView.js';
 
 import 'core-js/stable'; // polyfill other js codes for old browsers
 import 'regenerator-runtime/runtime'; // polyfill asyn/await
-import { async } from 'regenerator-runtime';
 
 // hot module replacement
 // if (module.hot) {
@@ -35,8 +35,6 @@ const controlRecipes = async function () {
 
     // (4) rendring recipe
     recipeView.render(model.state.recipe);
-
-    
   } catch (err) {
     recipeView.renderError();
   }
@@ -101,6 +99,12 @@ const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmark);
 };
 
+const controlAddRecipe = function (newRecipe) {
+  console.log(newRecipe);
+
+  // upload new recipe data
+};
+
 // the publisher subscriber pattern
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarks);
@@ -109,6 +113,7 @@ const init = function () {
   recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 init();
 // listen for hashchange event
