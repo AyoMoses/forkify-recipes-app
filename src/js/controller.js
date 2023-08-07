@@ -3,6 +3,7 @@ import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 import 'core-js/stable'; // polyfill other js codes for old browsers
 import 'regenerator-runtime/runtime'; // polyfill asyn/await
@@ -25,6 +26,7 @@ const controlRecipes = async function () {
 
     // (0) Update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+    bookmarksView.update(model.state.bookmark);
 
     // (1) load recipe from model - since loadrecipe returns a promise, we need to await before moving on in the codebase
     await model.loadRecipe(id);
@@ -80,10 +82,15 @@ const controlServings = function (newServings) {
 };
 
 const controlAddBookmark = function () {
+  // 1. Add or remove bookmark
   if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
   else model.deleteBookmark(model.state.recipe.id);
-  console.log(model.state.recipe);
+
+  // 2. Update recipe view
   recipeView.update(model.state.recipe);
+
+  // 3. Render the bookmark
+  bookmarksView.render(model.state.bookmark);
 };
 
 // the publisher subscriber pattern

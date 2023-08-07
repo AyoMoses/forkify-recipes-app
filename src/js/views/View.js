@@ -5,13 +5,16 @@ import icons from 'url:../../img/icons.svg'; // how to import in parcel 2
 export default class View {
   _data;
 
-  render(data) {
+  render(data, render = true) {
     // guard clause to check if there's no data, data is an array and data length is empty. If one of these is true, then exit and return the error immediately
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
 
     this._data = data;
     const markup = this._generateMarkup();
+
+    if (!render) return markup;
+
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
