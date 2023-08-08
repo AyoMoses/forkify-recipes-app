@@ -115,6 +115,14 @@ const controlAddRecipe = async function (newRecipe) {
     // Success message
     addRecipeView.renderMessage();
 
+    // Render bookmark view
+    bookmarksView.render(model.state.bookmark);
+
+    // Change ID in the URL
+    // the history API is usefull for moving back and forth a page or changing url without refreshing
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+    // window.history.back(); 
+
     // Close form modal
     setTimeout(function () {
       addRecipeView.toggleWindow();
