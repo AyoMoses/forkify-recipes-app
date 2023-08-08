@@ -31,7 +31,10 @@ const createRecipeObject = function (data) {
     ...(recipe.key && { key: recipe.key }), // we short circuit and spread the data if recipe.key exists then {key: recipe. key} will run. Else, we leave as so. We could have just written key: recipe.key. A VERY NICE TRICK TO CONDITIONALLY ADD PROPERTIES TO AN OBJECT
   };
 };
-
+/**
+ * Load recipe with AJAX function created. Also updates the bookmark
+ * @param {#hash} id 
+ */
 export const loadRecipe = async function (id) {
   try {
     const data = await AJAX(`${API_URL}${id}?key=${API_KEY}`);
@@ -134,8 +137,8 @@ export const uploadRecipe = async function (newRecipe) {
     const ingredients = Object.entries(newRecipe)
       .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
       .map(ing => {
-        const ingArr = ing[1].split(',').map(el => el.trim);
         // const ingArr = ing[1].replaceAll(' ', '').split(',');
+        const ingArr = ing[1].split(',').map(el => el.trim);
         if (ingArr.length !== 3)
           throw new Error(
             'Wrong ingredient format! Please use the correct format :)'
